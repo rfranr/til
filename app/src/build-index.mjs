@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const TIL_DIR = path.resolve("../content");
+const TIL_DIR = path.resolve("content");
 const files = [];
 
 async function readDir(dir) {
@@ -75,7 +75,6 @@ for (const file of files) {
 
 items.sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
-//await fs.mkdir("public", { recursive: true });
-await fs.copyFile("./src/index.html", "../dist/index.html");
-await fs.writeFile("../dist/index.json", JSON.stringify(items, null, 2));
+await fs.copyFile("app/src/index.html", "dist/index.html");
+await fs.writeFile("dist/index.json", JSON.stringify(items, null, 2));
 console.log(`Wrote dist/index.json with ${items.length} items`);
