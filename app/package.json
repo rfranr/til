@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build:index": "node src/build-index.mjs",
-    "build": "npm run build:index"
+    "build": "npm run build:index",
+    "serve": "node src/serve.mjs"
   }
 }

@@ -1,7 +1,15 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const TIL_DIR = path.resolve("content");
+const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
+const BASE_DIR = path.resolve( CURRENT_DIR, "../../");
+const TIL_DIR = path.resolve(BASE_DIR, "content");
+console.log(`BASE_DIR: ${BASE_DIR}`);
+console.log(`CURRENT_DIR: ${CURRENT_DIR}`);
+console.log(`TIL_DIR: ${TIL_DIR}`);
+
 const files = [];
 
 async function readDir(dir) {
@@ -75,6 +83,6 @@ for (const file of files) {
 
 items.sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
-await fs.copyFile("app/src/index.html", "dist/index.html");
-await fs.writeFile("dist/index.json", JSON.stringify(items, null, 2));
-console.log(`Wrote dist/index.json with ${items.length} items`);
+await fs.copyFile( `${BASE_DIR}/app/src/index.html`, `${BASE_DIR}/dist/index.html`);
+await fs.writeFile(`${BASE_DIR}/dist/index.json`, JSON.stringify(items, null, 2));
+console.log(`Wrote ${BASE_DIR}/dist/index.json with ${items.length} items`);
